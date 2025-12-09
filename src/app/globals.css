@@ -1,6 +1,6 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-:root {
+/* :root {
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -17,10 +17,64 @@
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-}
+} */
 
-body {
+/* body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+} */
+
+/* Our Added Styling */
+
+* {
+  margin: 5px;
+  padding: 5px;
+  font: Arial;
 }
+
+/* button {
+  margin: '5px';
+} */
+
+/* .buttons {
+  background-color: 'purple';
+  margin: '5px';
+  border-radius: '5px';
+} */
+
+input {
+  width: 175px;
+}
+
+.violations-data {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  font-weight: bold;
+  font-size: 1.7em;
+}
+
+p,
+label,
+.input,
+.buttons {
+  display: flex;
+  justify-content: center;
+  /* font-weight: bold; */
+}
+
+.example-license {
+  margin-top: 0px;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
