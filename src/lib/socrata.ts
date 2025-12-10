@@ -1,5 +1,5 @@
 // this is where we will make queries and parse them
-import { Violation } from '../types/index';
+import { Violation } from '../app/types/index';
 
 const API_ENDPOINT = `https://data.cityofnewyork.us/api/v3/views/nc67-uf89/query.json?pageNumber=1&pageSize=10&app_token=$YUB3iukmGyYtZlDXruErL1D4m&query=`;
 const API_TOKEN = 'YUB3iukmGyYtZlDXruErL1D4m';
@@ -16,8 +16,11 @@ export async function searchByPlate(plate: string): Promise<Violation[]> {
     // Updating the license plate to the cleaned plate
     plate = cleanPlate(plate);
     // const query = `SELECT * WHERE plate = '${plate}' ORDER BY issue_date DESC LIMIT 10`;
+    
+  
+    
     const query = `SELECT * WHERE plate = '${plate}'`;
-
+    console.log(`API ENDPOINT: ${API_ENDPOINT}${encodeURIComponent(query)}`)
     // Making fetch request to NYC Open Data - Open Parking and Camera Violations
     const response = await fetch(
       `${API_ENDPOINT}${encodeURIComponent(query)}`,
@@ -38,6 +41,7 @@ export async function searchByPlate(plate: string): Promise<Violation[]> {
 
     const data = await response.json();
 
+    console.log('socrata data', data);
     return data;
   } catch (e) {
     console.error('Search Failed:', e);

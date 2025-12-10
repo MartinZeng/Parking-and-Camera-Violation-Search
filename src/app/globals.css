@@ -27,7 +27,7 @@
 
 /* Our Added Styling */
 
-* {
+/* * {
   margin: 5px;
   padding: 5px;
   font: Arial;
@@ -43,7 +43,7 @@
   border-radius: '5px';
 } */
 
-input {
+/* input {
   width: 175px;
 }
 
@@ -69,11 +69,11 @@ label,
   display: flex;
   justify-content: center;
   /* font-weight: bold; */
-}
+/* } */
 
-.example-license {
-  margin-top: 0px;
-}
+/* .example-license { */
+  /* margin-top: 0px;
+}  */
 
 @tailwind base;
 @tailwind components;
