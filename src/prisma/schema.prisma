@@ -1,0 +1,32 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+model Subscription {
+  id            Int      @id @default(autoincrement())
+  email         String
+  plate         String
+  state         String
+  createdAt     DateTime @default(now())
+  lastCheckedAt DateTime?
+
+  tickets Ticket[]
+}
+
+model Ticket {
+  id              Int      @id @default(autoincrement())
+  summonsNumber   String   @unique
+  plate           String
+  state           String
+  issueDate       String
+  violation       String
+  fineAmount      Float
+  createdAt       DateTime @default(now())
+}
