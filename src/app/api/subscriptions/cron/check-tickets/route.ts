@@ -73,6 +73,7 @@ export async function POST(request: NextRequest) {
         console.error(`Error processing subscription ID ${sub.id}:`, subError);
       }
     }
+///nothing
 
     return NextResponse.json({ message: 'Ticket check completed',summary:summry }, { status: 200 });
   } catch (error) {
