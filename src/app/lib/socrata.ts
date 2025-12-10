@@ -12,12 +12,29 @@ function cleanPlate(plate: string): string {
   return plate.replace(/\s+/g, '').toUpperCase();
 }
 
+// normalize the ticket data structure
+export type NormalizedTicket = {
+  summonsNumber: string;
+  plate: string;
+  state: string;
+  issueDate: string;
+  violation: string;
+  fineAmount: number;
+};
+
+// search for violations by license plate
 export async function searchByPlate(plate: string): Promise<any[]> {
   try {
     // Updating the license plate to the cleaned plate
     plate = cleanPlate(plate);
     // const query = `SELECT * WHERE plate = '${plate}' ORDER BY issue_date DESC LIMIT 10`;
     const query = `SELECT * WHERE plate = '${plate}'`;
+
+    // Constructing the full API URL with query parameters
+    const url = new URL(API_ENDPOINT);
+    url.searchParams.set('pageNumber', '1');
+    url.searchParams.set('pageSize', '10');
+    url.searchParams.set('query', query);
 
     // Making fetch request to NYC Open Data - Open Parking and Camera Violations
     const response = await fetch(
@@ -39,7 +56,32 @@ export async function searchByPlate(plate: string): Promise<any[]> {
 
     const data = await response.json();
 
-    return data;
+    // Parsing the data into Violation objects
+    const columns = data.columns.map((col: any) => col.name as string);
+    
+    const results: Violation[] = [];// Array to hold parsed violation objects
+// Iterate over each row in the data
+    for (const row of data.rows as any[][]) {
+      const obj: Record<string, any> = {};// Temporary object to hold column-value pairs
+      // Map each column to its corresponding value in the row
+      columns.forEach((colName, idx) => {// For each column name and its index
+        obj[colName] = row[idx];// Assign the value from the row to the object using the column name as key
+      });
+
+      // Map to your Violation type (adjust fields if your type is different)
+      results.push({
+        summonsNumber: obj.summons_number ?? '',
+        plate: obj.plate ?? '',
+        state: obj.state ?? obj.registration_state ?? '',
+        issueDate: obj.issue_date ?? '',
+        violationTime: obj.violation_time ?? '',
+        violation: obj.violation_description ?? obj.violation ?? '',
+        fineAmount: Number(obj.fine_amount ?? 0),
+        status: obj.violation_status ?? '',
+      });
+    }
+
+
   } catch (e) {
     console.error('Search Failed:', e);
     throw e;
