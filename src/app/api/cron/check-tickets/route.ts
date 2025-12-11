@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
         });
 
         const existingSummons = new Set(
-          existingTickets.map((t: Violation) => t.summons_number)
+          existingTickets.map((t) => t.summons_number)
         );
 
         const newTickets = tickets.filter(
