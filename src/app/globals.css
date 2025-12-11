@@ -1,6 +1,6 @@
 @import 'tailwindcss';
 
-/* :root {
+:root {
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -12,12 +12,16 @@
   --font-mono: var(--font-geist-mono);
 }
 
+@theme {
+  --color-facebookblue: #1877f2;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
-} */
+}
 
 /* body {
   background: var(--background);
@@ -72,7 +76,7 @@ label,
 /* } */
 
 /* .example-license { */
-  /* margin-top: 0px;
+/* margin-top: 0px;
 }  */
 
 @tailwind base;

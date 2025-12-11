@@ -12,10 +12,10 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-export const metadata: Metadata = {
-  title: 'NYC License Plate Lookup',
-  description: 'Search parking violation data by license plate',
-};
+// export const metadata: Metadata = {
+//   title: 'NYC License Plate Lookup',
+//   description: 'Search parking violation data by license plate',
+// };
 
 export default function RootLayout({
   children,
@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`bg-blue-50 ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
       </body>

@@ -17,4 +17,11 @@ export interface Violation {
   county: string;
   issuing_agency: string;
   violation_status: string;
+  summons_image: object;
+}
+
+export interface ViolationTableProps {
+  violations: Violation[];
+  loading: boolean;
+  error: string;
 }

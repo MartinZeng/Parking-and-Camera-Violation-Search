@@ -7,31 +7,25 @@ export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url);
     const plate = (searchParams.get('plate') || '').trim();
-    const state = (searchParams.get('state') || '').trim();
 
-    if (!plate) {
-      return NextResponse.json(
-        { error: 'Missing plate query parameter' },
-        { status: 400 },
-      );
-    }
-
-    const violations: Violation[] = await searchByPlate(plate, state || undefined);
+    const violations: Violation[] = await searchByPlate(plate);
 
     // if you want to normalize for UI:
     const tickets = violations.map((v, idx) => ({
       id: v.summons_number?.toString() || idx.toString(),
-      summonsNumber: v.summons_number?.toString() || '',
+      summons_number: v.summons_number?.toString() || '',
       plate: v.plate,
       state: v.state,
-      issueDate: v.issue_date,
+      issue_date: v.issue_date,
       violation: v.violation,
-      fineAmount: v.fine_amount,
+      fine_amount: v.fine_amount,
+      amount_due: v.amount_due,
+      county: v.county,
+      location: v.summons_image,
     }));
 
     return NextResponse.json({
       plate: plate.toUpperCase(),
-      state: state || null,
       count: tickets.length,
       tickets,
     });
@@ -39,7 +33,7 @@ export async function GET(request: NextRequest) {
     console.error('Error in /api/tickets:', err);
     return NextResponse.json(
       { error: 'Server error while searching tickets' },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
