@@ -22,26 +22,25 @@ export async function POST(request: NextRequest) {
 
     for (const sub of subscriptions) {
       try {
-        const tickets = await searchByPlate(sub.plate, sub.state);
-        const summonsNumbers = tickets.map((t) =>
-          t.summons_number?.toString(),
-        ).filter(Boolean) as string[];
+        const tickets = await searchByPlate(sub.plate);
+        const summonsNumbers = tickets
+          .map((t) => t.summons_number?.toString())
+          .filter(Boolean) as string[];
 
         if (summonsNumbers.length === 0) continue;
 
         const existingTickets = await prisma.ticket.findMany({
           where: {
             plate: sub.plate,
-            state: sub.state,
           },
         });
 
         const existingSummons = new Set(
-          existingTickets.map((t) => t.summonsNumber),
+          existingTickets.map((t) => t.summonsNumber)
         );
 
         const newTickets = tickets.filter(
-          (t) => !existingSummons.has(t.summons_number?.toString() || ''),
+          (t) => !existingSummons.has(t.summons_number?.toString() || '')
         );
 
         if (newTickets.length > 0) {
@@ -79,22 +78,19 @@ export async function POST(request: NextRequest) {
           data: { lastCheckedAt: new Date() },
         });
       } catch (subError) {
-        console.error(
-          `Error processing subscription ID ${sub.id}:`,
-          subError,
-        );
+        console.error(`Error processing subscription ID ${sub.id}:`, subError);
       }
     }
 
     return NextResponse.json(
       { message: 'Ticket check completed', summary },
-      { status: 200 },
+      { status: 200 }
     );
   } catch (error) {
     console.error('Error in ticket check cron job:', error);
     return NextResponse.json(
       { error: 'Internal Server Error' },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
