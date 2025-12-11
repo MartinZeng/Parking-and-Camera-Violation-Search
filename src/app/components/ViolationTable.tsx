@@ -1,5 +1,5 @@
 import React from 'react';
-import { Violation, ViolationTableProps } from '../types/index';
+import { ViolationTableProps } from '../types/index';
 
 const ViolationTable: React.FC<ViolationTableProps> = ({
   violations,
@@ -26,14 +26,14 @@ const ViolationTable: React.FC<ViolationTableProps> = ({
     const dateA = new Date(a.issue_date);
     const dateB = new Date(b.issue_date);
 
-    return dateA - dateB;
+    return dateA.getTime() - dateB.getTime();
   });
   const totalDue = violations.reduce(
-    (sum, v) => sum + parseFloat(v.amount_due || '0'),
+    (sum, v) => sum + parseFloat(String(v.amount_due ?? '0')),
     0
   );
   const totalPaid = violations.reduce(
-    (sum, v) => sum + parseFloat(v.fine_amount || '0'),
+    (sum, v) => sum + parseFloat(String(v.fine_amount || '0')),
     0
   );
   return (

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { searchByPlate } from '@/lib/socrata';
 import { sendNewTicketEmail } from '@/lib/email';
+import { Violation } from '../../../types/index';
 
 export async function POST(request: NextRequest) {
   try {
@@ -36,7 +37,7 @@ export async function POST(request: NextRequest) {
         });
 
         const existingSummons = new Set(
-          existingTickets.map((t) => t.summonsNumber)
+          existingTickets.map((t: Violation) => t.summons_number)
         );
 
         const newTickets = tickets.filter(
