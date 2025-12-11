@@ -97,20 +97,20 @@ export default function Home() {
           <form>
             {/* <label>Search Your License Plate:</label> */}
             <label className='example-license'>
-              <small className='m-5 w-md'>Ex: ABC123</small>
+              <small className='m-5 w-md pb-1'>Ex: ABC123</small>
             </label>
             <div className='input'>
               <input
                 className='border border-slate-300 rounded-xs'
                 type='text'
-                placeholder='License Plate'
+                placeholder=' License Plate'
                 value={plate}
                 onChange={(event) => setPlate(event.target.value.toUpperCase())}
               ></input>
             </div>
 
             {/* Cancel and Search Buttons */}
-            <div className='buttons'>
+            <div className='buttons mb-5'>
               <button
                 className='bg-white hover:bg-[#1877F2] hover:text-white border border-[#1877F2] hover:border-transparent focus:ring-1 focus:outline-none focus:ring-cyan-600 font-medium text-center py-1 px-4.5 rounded leading-5 m-3'
                 type='reset'
@@ -127,57 +127,21 @@ export default function Home() {
               </button>
             </div>
           </form>
-          <form action='#'>
-            <div className='items-center mx-auto mb-3 space-y-4 max-w-screen-sm sm:flex sm:space-y-0'>
-              <div className='relative w-full'>
-                <label
-                  for='email'
-                  className='hidden mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
-                >
-                  Email address
-                </label>
-                <div className='flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none'>
-                  <svg
-                    className='w-5 h-5 text-gray-500 dark:text-gray-400'
-                    fill='currentColor'
-                    viewBox='0 0 20 20'
-                    xmlns='http://www.w3.org/2000/svg'
-                  >
-                    <path d='M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z'></path>
-                    <path d='M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z'></path>
-                  </svg>
-                </div>
-                <input
-                  className='block p-3 pl-10 w-full text-sm bg-white rounded-lg border border-gray-300 sm:rounded-none sm:rounded-l-lg focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500'
-                  placeholder='Enter your email'
-                  type='email'
-                  id='email'
-                  required=''
-                ></input>
-              </div>
-              <div>
-                <button
-                  type='submit'
-                  className='py-3 px-3 w-full text-sm font-medium text-center bg-[#42b72a] text-white rounded-lg border cursor-pointer bg-primary-700 border-primary-600 sm:rounded-none sm:rounded-r-lg hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800'
-                >
-                  Subscribe
-                </button>
-              </div>
-            </div>
-          </form>
-          {/* <form>
+          <form>
             <label>Subscribe with your email here:</label>
             <input
-              className='border border-slate-300 rounded-xs'
+              className='border border-slate-300 rounded-xs py-0.1'
               type='text'
-              placeholder='abc@def.com'
+              placeholder=' abc@def.com'
               value={email}
-              onChange={(event) => setPlate(event.target.value.toUpperCase())}
+              onChange={(event) => handleSubscribe}
             ></input>
-            <button className='bg-[#42b72a] hover:bg-white text-white border border-[#42b72a] hover:text-black hover:border-[#42b72a] focus:ring-1 focus:outline-none focus:ring-[#42b72a] font-medium text-center py-0.5 px-3 rounded mt-3 mb-3 leading-5'>
+            <div>
+            <button className='bg-[#42b72a] text-sm w-1/5 text-white border border-[#42b72a] hover:ring-1 hover:ring-[#42b72a] focus:ring-1 focus:outline-none focus:ring-[#2c791c] font-medium text-center p-1.5 rounded m-3 leading-5'>
               Subscribe
             </button>
-          </form> */}
+            </div>
+          </form>
           <p className='text-body mb-6'>
             Here is more information about any tickets or violations you may
             have:
