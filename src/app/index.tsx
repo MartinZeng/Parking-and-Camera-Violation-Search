@@ -3,7 +3,7 @@
 import { FormEvent, useState } from 'react';
 import { Violation } from './types/index';
 import './globals.css';
-import './layout.tsx';
+import './layout';
 import ViolationTable from './components/ViolationTable';
 
 export default function Home() {
@@ -137,9 +137,9 @@ export default function Home() {
               onChange={(event) => handleSubscribe}
             ></input>
             <div>
-            <button className='bg-[#42b72a] text-sm w-1/5 text-white border border-[#42b72a] hover:ring-1 hover:ring-[#42b72a] focus:ring-1 focus:outline-none focus:ring-[#2c791c] font-medium text-center p-1.5 rounded m-3 leading-5'>
-              Subscribe
-            </button>
+              <button className='bg-[#42b72a] text-sm w-1/5 text-white border border-[#42b72a] hover:ring-1 hover:ring-[#42b72a] focus:ring-1 focus:outline-none focus:ring-[#2c791c] font-medium text-center p-1.5 rounded m-3 leading-5'>
+                Subscribe
+              </button>
             </div>
           </form>
           <p className='text-body mb-6'>
