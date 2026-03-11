@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { searchByPlate } from '@/lib/socrata';
 import { sendNewTicketEmail } from '@/lib/email';
-import { Violation } from '../../../types/index';
 
 export async function POST(request: NextRequest) {
   try {
@@ -37,11 +36,11 @@ export async function POST(request: NextRequest) {
         });
 
         const existingSummons = new Set(
-          existingTickets.map((t) => t.summonsNumber)
+          existingTickets.map((t) => t.summonsNumber),
         );
 
         const newTickets = tickets.filter(
-          (t) => !existingSummons.has(t.summons_number?.toString() || '')
+          (t) => !existingSummons.has(t.summons_number?.toString() || ''),
         );
 
         if (newTickets.length > 0) {
@@ -85,13 +84,13 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(
       { message: 'Ticket check completed', summary },
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error('Error in ticket check cron job:', error);
     return NextResponse.json(
       { error: 'Internal Server Error' },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

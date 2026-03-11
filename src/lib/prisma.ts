@@ -1,5 +1,5 @@
 // lib/prisma.ts
-import { PrismaClient } from '@prisma/client';// Import the PrismaClient constructor from the Prisma Client library
+import { PrismaClient } from '@prisma/client'; // Import the PrismaClient constructor from the Prisma Client library
 
 // Create a global variable to hold the PrismaClient instance
 
